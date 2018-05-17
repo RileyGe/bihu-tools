@@ -41,7 +41,7 @@ def score_for_each_lottery(lucky_num, lottery_id):
     return score
 
 #函数 3
-#最核心
+#最核心算法，给每个用户打个分
 def compute_airdrop_reward():
     r = {}
     #用币乎官方公布的比特币未来的某个区块号，计算一个幸运数字
@@ -57,7 +57,9 @@ def compute_airdrop_reward():
 
 #计算每一个用户的得分，计算方法见函数 3
 reward_map = compute_airdrop_reward()
+#排个序
 reward_sorted = OrderedDict(sorted(reward_map.items(), key=lambda t: t[1], reverse = True))
+#结果输出
 print("=======================Rewards================================")
 for item in reward_sorted:
     print(str(item) + ": " + str(reward_map[item]))
