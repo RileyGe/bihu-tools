@@ -27,18 +27,21 @@ def lucky_num_from_block_hash(h):
     return r
 
 #函数 2
+#此方法最核心的算法就是score ＝ hash( luck_num + 奖券号) ％ base
 def score_for_each_lottery(lucky_num, lottery_id):
     # print(result_hash.hex())
+    # 这一段意思就是用幸运数字和你的 ID 再进行一次哈希，由于幸运数字是不可预测的，所以每个人的分数也是不可预测的
     h = hashlib.sha256()
     h.update(lucky_num)
     h.update(bytes(lottery_id))
 
-    #base就是一个
+    #base就是一个最高分吧，把多于这个分的都对取余数
     base = 10**11
     score = int(h.hexdigest(), 16) % base
     return score
 
 #函数 3
+#最核心
 def compute_airdrop_reward():
     r = {}
     #用币乎官方公布的比特币未来的某个区块号，计算一个幸运数字
